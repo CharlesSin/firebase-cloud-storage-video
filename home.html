@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Dashboard</title>
+
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="container">
+        <button type="button" class="google-signin" id="google-sign-out">
+            Sign Out with Google
+        </button>
+
+        <div class="card">
+            <p>Google Credential :</p>
+            <p id="googleCredential"></p>
+
+            <br>
+
+            <p>Firebase Token :</p>
+            <p id="googleToken"></p>
+
+            <br>
+
+            <p>Google User :</p>
+            <p id="googleUser"></p>
+        </div>
+
+        <div class="card">
+            <video id="my-video" controls src="" width=500 height="500"></video>
+        </div>
+    </div>
+
+    <script type="module" src="./init-firebase.js"></script>
+    <script>
+        function homeInit() {
+            const credential = localStorage.getItem("googleCredential");
+            const token = localStorage.getItem("googleToken");
+            const user = localStorage.getItem("googleUser");
+
+            document.querySelector("#googleCredential").textContent = JSON.stringify(JSON.parse(credential), undefined, 4);
+            document.querySelector("#googleToken").textContent = token;
+            document.querySelector("#googleUser").textContent = user;
+        }
+
+        window.onload = () => {
+            homeInit();
+        }
+    </script>
+</body>
+
+</html>

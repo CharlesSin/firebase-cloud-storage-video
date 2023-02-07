@@ -2,6 +2,9 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.16.0/firebas
 import { getStorage, ref, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-storage.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js";
 
+// Firebase Authentication
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js";
+
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDkJttfx-ZiwdcrMDysnqdPKo6axLbBEPg",
@@ -14,11 +17,14 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
 // Initialize Cloud Storage and get a reference to the service
-// gs://charles-fcm-app.appspot.com
 const storage = getStorage();
+
+// Auth
+const auth = getAuth(app);
+const providerGoogle = new GoogleAuthProvider();
 
 // Create a storage reference from our storage service
 getDownloadURL(ref(storage, "video/videoplayback.mp4"))
@@ -36,8 +42,60 @@ getDownloadURL(ref(storage, "video/videoplayback.mp4"))
 
     // Or inserted into an <img> element
     const video = document.getElementById("my-video");
-    video.setAttribute("src", url);
+    video?.setAttribute("src", url);
   })
   .catch((error) => {
     // Handle any errors
   });
+
+document.querySelector("#google-sign-in")?.addEventListener("click", function () {
+  googleSignInFunc();
+});
+
+document.querySelector("#google-sign-out")?.addEventListener("click", function () {
+  googleSignOutFunc();
+});
+
+function googleSignInFunc() {
+  signInWithPopup(auth, providerGoogle)
+    .then((result) => {
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      const user = result.user;
+      /**
+       * After Sign in we can get infomation from firebase
+       * 1. Google provider credential
+       * 2. token
+       * 3. user info, google name, google profile picture.
+       * i save all info to local storage.
+       */
+      localStorage.setItem("googleCredential", JSON.stringify(credential));
+      localStorage.setItem("googleToken", token);
+      localStorage.setItem("googleUser", JSON.stringify(user));
+      console.log(credential);
+      console.log(token);
+      console.log(user);
+      window.location.href = "./home.html";
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      const email = error.email;
+      const credential = GoogleAuthProvider.credentialFromError(error);
+    });
+}
+
+function googleSignOutFunc() {
+  console.log("googleSignOutFunc");
+  signOut(auth)
+    .then(() => {
+      // removeItem
+      localStorage.removeItem("googleCredential");
+      localStorage.removeItem("googleToken");
+      localStorage.removeItem("googleUser");
+      window.location.href = "./index.html";
+    })
+    .catch((error) => {
+      // An error happened.
+    });
+}
