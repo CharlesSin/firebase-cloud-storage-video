@@ -1,9 +1,10 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js";
 import { getStorage, ref, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-storage.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js";
 
 // Firebase Authentication
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js";
+
+import { createFirestoreData, readFirestoreData, updateFirestoreData, deleteFirestoreData, filterFirestoreData } from "./module/CRUD.js";
 
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
@@ -27,26 +28,26 @@ const auth = getAuth(app);
 const providerGoogle = new GoogleAuthProvider();
 
 // Create a storage reference from our storage service
-getDownloadURL(ref(storage, "video/videoplayback.mp4"))
-  .then((url) => {
-    // `url` is the download URL for 'images/stars.jpg'
+// getDownloadURL(ref(storage, "video/videoplayback.mp4"))
+//   .then((url) => {
+//     // `url` is the download URL for 'images/stars.jpg'
 
-    // This can be downloaded directly:
-    const xhr = new XMLHttpRequest();
-    xhr.responseType = "blob";
-    xhr.onload = (event) => {
-      const blob = xhr.response;
-    };
-    xhr.open("GET", url);
-    xhr.send();
+//     // This can be downloaded directly:
+//     const xhr = new XMLHttpRequest();
+//     xhr.responseType = "blob";
+//     xhr.onload = (event) => {
+//       const blob = xhr.response;
+//     };
+//     xhr.open("GET", url);
+//     xhr.send();
 
-    // Or inserted into an <img> element
-    const video = document.getElementById("my-video");
-    video?.setAttribute("src", url);
-  })
-  .catch((error) => {
-    // Handle any errors
-  });
+//     // Or inserted into an <img> element
+//     const video = document.getElementById("my-video");
+//     video?.setAttribute("src", url);
+//   })
+//   .catch((error) => {
+//     // Handle any errors
+//   });
 
 document.querySelector("#google-sign-in")?.addEventListener("click", function () {
   googleSignInFunc();
@@ -99,3 +100,9 @@ function googleSignOutFunc() {
       // An error happened.
     });
 }
+
+// createFirestoreData();
+// readFirestoreData();
+// updateFirestoreData();
+// deleteFirestoreData();
+filterFirestoreData();
