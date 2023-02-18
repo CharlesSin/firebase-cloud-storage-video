@@ -1,5 +1,4 @@
-import { collection, doc, setDoc, getDoc, getDocs, getFirestore, deleteDoc, updateDoc, query, where } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js";
-import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js";
+import { collection, doc, setDoc, getDoc, getFirestore, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js";
 
 import { app } from "../config/firebaseConfig.js";
 
@@ -86,20 +85,4 @@ export async function updateFirestoreData() {
 // Delete Data
 export async function deleteFirestoreData() {
   await deleteDoc(doc(firestoreDB, "cities", "DC"));
-}
-
-// Filter data
-export async function filterFirestoreData() {
-  console.log("filterFirestoreData");
-  const citiesRef = collection(firestoreDB, "cities");
-  const qCondition = query(citiesRef, where("state", "==", "CA"));
-
-  const querySnapshot = await getDocs(qCondition);
-
-  querySnapshot.forEach((doc) => {
-    // doc.data() is never undefined for query doc snapshots
-    console.log(doc.id, " => ", doc.data());
-    console.log(`Document id is: ${doc.id}`);
-    console.log(`Document data is: ${JSON.stringify(doc.data())}`);
-  });
 }
