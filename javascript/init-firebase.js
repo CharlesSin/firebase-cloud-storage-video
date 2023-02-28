@@ -15,6 +15,11 @@ document.querySelector("#google-sign-out")?.addEventListener("click", function (
   googleSignOutFunc();
 });
 
+// 當我在 home page 時，呼叫 readFirebaseStorage()
+if (window.location.pathname.includes("home")) {
+  readFirebaseStorage();
+}
+
 // 新增資料到 Firestore 中
 // createFirestoreData();
 

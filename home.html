@@ -2,39 +2,66 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
 
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/style.css" />
 </head>
 
 <body>
     <div class="container-fuild">
-        <button type="button" class="google-signin" id="google-sign-out">
-            Sign Out with Google
-        </button>
+        <button type="button" class="google-signin" id="google-sign-out">Sign Out with Google</button>
+
+        <div class="card">
+            <div class="card-body p-0">
+                <div class="row m-0 flex-md-nowrap" style="gap: 20px">
+                    <div class="col-md-3 col-sm-12 flex-fill p-0 align-items-center">
+                        <video id="my-video" controls src="" class="video w-100"></video>
+                    </div>
+                    <div class="col-md-3 col-sm-12 flex-fill p-0 align-items-center">
+                        <video id="my-video" controls src="" class="video w-100"></video>
+                    </div>
+                    <div class="col-md-3 col-sm-12 flex-fill p-0 align-items-center">
+                        <video id="my-video" controls src="" class="video w-100"></video>
+                    </div>
+                    <div class="col-md-3 col-sm-12 flex-fill p-0 align-items-center">
+                        <video id="my-video" controls src="" class="video w-100"></video>
+                    </div>
+                </div>
+                <div class="row m-0 flex-md-nowrap" style="gap: 20px">
+                    <div class="col-md-3 col-sm-12 flex-fill p-0 align-items-center">
+                        <video id="my-video" controls src="" class="video w-100"></video>
+                    </div>
+                    <div class="col-md-3 col-sm-12 flex-fill p-0 align-items-center">
+                        <video id="my-video" controls src="" class="video w-100"></video>
+                    </div>
+                    <div class="col-md-3 col-sm-12 flex-fill p-0 align-items-center">
+                        <video id="my-video" controls src="" class="video w-100"></video>
+                    </div>
+                    <div class="col-md-3 col-sm-12 flex-fill p-0 align-items-center">
+                        <video id="my-video" controls src="" class="video w-100"></video>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="card">
             <p>Google Credential :</p>
             <p id="googleCredential"></p>
 
-            <br>
+            <br />
 
             <p>Firebase Token :</p>
             <p id="googleToken"></p>
 
-            <br>
+            <br />
 
             <p>Google User :</p>
             <p id="googleUser"></p>
-        </div>
-
-        <div class="card">
-            <video id="my-video" controls src="" width=500 height="500"></video>
         </div>
     </div>
 
@@ -56,7 +83,7 @@
 
         window.onload = () => {
             homeInit();
-        }
+        };
     </script>
 </body>
 
